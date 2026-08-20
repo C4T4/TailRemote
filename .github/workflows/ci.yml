@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: macos-15
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Resolve Swift packages
+        run: >-
+          xcodebuild -resolvePackageDependencies
+          -project TailRemote.xcodeproj
+          -scheme TailRemote
+
+      - name: Run tests
+        run: >-
+          xcodebuild
+          -project TailRemote.xcodeproj
+          -scheme TailRemote
+          -destination 'platform=iOS Simulator,name=iPhone 16 Pro'
+          test

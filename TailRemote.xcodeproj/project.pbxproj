@@ -1,0 +1,509 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1126A8F4E09410E21B6F6C12 /* RemoteCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8074CBA02B1C98C506FEF0A4 /* RemoteCanvasView.swift */; };
+		353328B7D2C136F54938841A /* RemoteGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E143ECD47EB1A41E814E6835 /* RemoteGeometry.swift */; };
+		49B53A9597570CD608E6FFA3 /* TailRemoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089BE7D05C1F6CE1392BE99 /* TailRemoteApp.swift */; };
+		5B721FAB275BC82491E52CC0 /* RemoteGeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF842EC905513DE1F558427C /* RemoteGeometryTests.swift */; };
+		5E4C489BAA9635075269D4B2 /* VNCSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE94C83448BD353A60F9B7E /* VNCSession.swift */; };
+		6874F12409C884152CC44D2B /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C47AA8088D8DE34F7E4D459 /* AppTheme.swift */; };
+		84D2DD3D1B74A16603A37E32 /* RoyalVNCKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 452CC833F045616A452F4A83 /* RoyalVNCKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		851B721799D7F54023BF2166 /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EF57526E9CC3BE3AA2798 /* ConnectView.swift */; };
+		AADC534D12452B01245311D1 /* THIRD_PARTY_NOTICES.md in Resources */ = {isa = PBXBuildFile; fileRef = AF36D9C3EDA7E08F9323B2EF /* THIRD_PARTY_NOTICES.md */; };
+		B43E0CDEA8028EB8C6E28E12 /* RemoteKeyboardBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773006B68C596E30C7A15BBD /* RemoteKeyboardBridge.swift */; };
+		BE8C6E2552EE4A34FA6CDBAE /* RoyalVNCKit in Frameworks */ = {isa = PBXBuildFile; productRef = 452CC833F045616A452F4A83 /* RoyalVNCKit */; };
+		CD0B0BD248B9866C84970288 /* RemoteDesktopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634414A3D8B57A8BB5AF6C76 /* RemoteDesktopView.swift */; };
+		FD3E904C0EA487A7B9991AD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5D256DB8C695C335278EAF0 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		78829F7CAC11309CA9CA2E26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2247218BEC32B887C1BD79EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA32CB9C0708196E4FA66470;
+			remoteInfo = TailRemote;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6DE8E9925B950C2F7C633CEE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				84D2DD3D1B74A16603A37E32 /* RoyalVNCKit in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		200EF57526E9CC3BE3AA2798 /* ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
+		4C47AA8088D8DE34F7E4D459 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		590132C4092C3BD77116DDFD /* TailRemoteTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TailRemoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		634414A3D8B57A8BB5AF6C76 /* RemoteDesktopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDesktopView.swift; sourceTree = "<group>"; };
+		773006B68C596E30C7A15BBD /* RemoteKeyboardBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteKeyboardBridge.swift; sourceTree = "<group>"; };
+		8074CBA02B1C98C506FEF0A4 /* RemoteCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCanvasView.swift; sourceTree = "<group>"; };
+		81E801746FCAE41A56CFF1D8 /* TailRemote.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = TailRemote.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CE94C83448BD353A60F9B7E /* VNCSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNCSession.swift; sourceTree = "<group>"; };
+		AF36D9C3EDA7E08F9323B2EF /* THIRD_PARTY_NOTICES.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = THIRD_PARTY_NOTICES.md; sourceTree = "<group>"; };
+		D089BE7D05C1F6CE1392BE99 /* TailRemoteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TailRemoteApp.swift; sourceTree = "<group>"; };
+		E143ECD47EB1A41E814E6835 /* RemoteGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGeometry.swift; sourceTree = "<group>"; };
+		EF842EC905513DE1F558427C /* RemoteGeometryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGeometryTests.swift; sourceTree = "<group>"; };
+		F5D256DB8C695C335278EAF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D531E17A0E405F39C7997E3B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE8C6E2552EE4A34FA6CDBAE /* RoyalVNCKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3B4E8A370816B09D2A04490D /* TailRemoteTests */ = {
+			isa = PBXGroup;
+			children = (
+				EF842EC905513DE1F558427C /* RemoteGeometryTests.swift */,
+			);
+			path = TailRemoteTests;
+			sourceTree = "<group>";
+		};
+		8FB0785E7BD0BF8195B40D72 /* TailRemote */ = {
+			isa = PBXGroup;
+			children = (
+				4C47AA8088D8DE34F7E4D459 /* AppTheme.swift */,
+				F5D256DB8C695C335278EAF0 /* Assets.xcassets */,
+				200EF57526E9CC3BE3AA2798 /* ConnectView.swift */,
+				8074CBA02B1C98C506FEF0A4 /* RemoteCanvasView.swift */,
+				634414A3D8B57A8BB5AF6C76 /* RemoteDesktopView.swift */,
+				E143ECD47EB1A41E814E6835 /* RemoteGeometry.swift */,
+				773006B68C596E30C7A15BBD /* RemoteKeyboardBridge.swift */,
+				D089BE7D05C1F6CE1392BE99 /* TailRemoteApp.swift */,
+				8CE94C83448BD353A60F9B7E /* VNCSession.swift */,
+			);
+			path = TailRemote;
+			sourceTree = "<group>";
+		};
+		C371250B6323C7D1C72EE36F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				81E801746FCAE41A56CFF1D8 /* TailRemote.app */,
+				590132C4092C3BD77116DDFD /* TailRemoteTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EE279A0BAEBF294119D0695D = {
+			isa = PBXGroup;
+			children = (
+				AF36D9C3EDA7E08F9323B2EF /* THIRD_PARTY_NOTICES.md */,
+				8FB0785E7BD0BF8195B40D72 /* TailRemote */,
+				3B4E8A370816B09D2A04490D /* TailRemoteTests */,
+				C371250B6323C7D1C72EE36F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B71C0881033D6F1B34799F37 /* TailRemoteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 714C47A1A20CFAA8976AFCD0 /* Build configuration list for PBXNativeTarget "TailRemoteTests" */;
+			buildPhases = (
+				7F6F86E4A85C031DD061E93E /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D0E8AE99C48EE8BFC28CE745 /* PBXTargetDependency */,
+			);
+			name = TailRemoteTests;
+			packageProductDependencies = (
+			);
+			productName = TailRemoteTests;
+			productReference = 590132C4092C3BD77116DDFD /* TailRemoteTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FA32CB9C0708196E4FA66470 /* TailRemote */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0811D009DC02203575D71A68 /* Build configuration list for PBXNativeTarget "TailRemote" */;
+			buildPhases = (
+				A601CD4B6C0EEEA884312B7B /* Sources */,
+				455A08515604F07C97F02C39 /* Resources */,
+				D531E17A0E405F39C7997E3B /* Frameworks */,
+				6DE8E9925B950C2F7C633CEE /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TailRemote;
+			packageProductDependencies = (
+				452CC833F045616A452F4A83 /* RoyalVNCKit */,
+			);
+			productName = TailRemote;
+			productReference = 81E801746FCAE41A56CFF1D8 /* TailRemote.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2247218BEC32B887C1BD79EC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					FA32CB9C0708196E4FA66470 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = CBD55C8EEC9E392B71072BE2 /* Build configuration list for PBXProject "TailRemote" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = EE279A0BAEBF294119D0695D;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				89C0703058790A6DB2A8E500 /* XCRemoteSwiftPackageReference "royalvnc" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = C371250B6323C7D1C72EE36F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FA32CB9C0708196E4FA66470 /* TailRemote */,
+				B71C0881033D6F1B34799F37 /* TailRemoteTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		455A08515604F07C97F02C39 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD3E904C0EA487A7B9991AD5 /* Assets.xcassets in Resources */,
+				AADC534D12452B01245311D1 /* THIRD_PARTY_NOTICES.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7F6F86E4A85C031DD061E93E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B721FAB275BC82491E52CC0 /* RemoteGeometryTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A601CD4B6C0EEEA884312B7B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6874F12409C884152CC44D2B /* AppTheme.swift in Sources */,
+				851B721799D7F54023BF2166 /* ConnectView.swift in Sources */,
+				1126A8F4E09410E21B6F6C12 /* RemoteCanvasView.swift in Sources */,
+				CD0B0BD248B9866C84970288 /* RemoteDesktopView.swift in Sources */,
+				353328B7D2C136F54938841A /* RemoteGeometry.swift in Sources */,
+				B43E0CDEA8028EB8C6E28E12 /* RemoteKeyboardBridge.swift in Sources */,
+				49B53A9597570CD608E6FFA3 /* TailRemoteApp.swift in Sources */,
+				5E4C489BAA9635075269D4B2 /* VNCSession.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D0E8AE99C48EE8BFC28CE745 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA32CB9C0708196E4FA66470 /* TailRemote */;
+			targetProxy = 78829F7CAC11309CA9CA2E26 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		43BD89F7EA5E624CF204D1A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = TailRemote;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "TailRemote connects directly to your Mac through your private Tailscale network.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.TailRemote;
+				PRODUCT_NAME = TailRemote;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		5E7BF05B9E550B8BF9199539 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = TailRemote;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "TailRemote connects directly to your Mac through your private Tailscale network.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.TailRemote;
+				PRODUCT_NAME = TailRemote;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		61C0D9C96CCAC8765411A630 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.TailRemoteTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TailRemote.app/TailRemote";
+			};
+			name = Release;
+		};
+		770EE607DD5DFCC62C3DB457 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		DDE648688D73402F07E0DAC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.TailRemoteTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TailRemote.app/TailRemote";
+			};
+			name = Debug;
+		};
+		F10779B072CB8ABD9ED79C25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0811D009DC02203575D71A68 /* Build configuration list for PBXNativeTarget "TailRemote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43BD89F7EA5E624CF204D1A7 /* Debug */,
+				5E7BF05B9E550B8BF9199539 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		714C47A1A20CFAA8976AFCD0 /* Build configuration list for PBXNativeTarget "TailRemoteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDE648688D73402F07E0DAC9 /* Debug */,
+				61C0D9C96CCAC8765411A630 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CBD55C8EEC9E392B71072BE2 /* Build configuration list for PBXProject "TailRemote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F10779B072CB8ABD9ED79C25 /* Debug */,
+				770EE607DD5DFCC62C3DB457 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		89C0703058790A6DB2A8E500 /* XCRemoteSwiftPackageReference "royalvnc" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/royalapplications/royalvnc.git";
+			requirement = {
+				kind = revision;
+				revision = 0a76294a7cdc8616b2eea5fba958415e544ed34b;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		452CC833F045616A452F4A83 /* RoyalVNCKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 89C0703058790A6DB2A8E500 /* XCRemoteSwiftPackageReference "royalvnc" */;
+			productName = RoyalVNCKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 2247218BEC32B887C1BD79EC /* Project object */;
+}

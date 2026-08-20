@@ -25,23 +25,27 @@ TailRemote is a small, open-source iPhone client for controlling a Mac through m
 - iOS keyboard input plus Escape, Tab, and right-click shortcuts
 - Remembered host and username; the password stays in memory only for the active connection
 
-## Requirements
+## Quick start
 
-- An iPhone running iOS 17 or newer
-- A Mac with **System Settings → General → Sharing → Screen Sharing** enabled
-- Tailscale connected on both devices, or another trusted network path to TCP port `5900`
-- Xcode 16 or newer for installing the development build
-- A free or paid Apple Developer account for device signing
+You need a Mac, an iPhone with iOS 17+, Xcode, and [Tailscale](https://tailscale.com/download) on both devices.
 
-## Install on an iPhone
+1. On your Mac, open **System Settings → General → Sharing** and enable **Screen Sharing**.
+2. Clone and open TailRemote:
 
-1. Clone the repository and open `TailRemote.xcodeproj` in Xcode.
-2. Select the `TailRemote` target under **Signing & Capabilities**.
-3. Choose your development team and set a bundle identifier unique to your account if Xcode requests one.
-4. Select your connected iPhone and press **Run**.
-5. Enter the Mac's Tailscale MagicDNS hostname or Tailscale IP, macOS username, and login password.
+   ```sh
+   git clone https://github.com/C4T4/TailRemote.git
+   open TailRemote/TailRemote.xcodeproj
+   ```
 
-The hostname normally looks like `your-mac.your-tailnet.ts.net`. Screen Sharing uses port `5900`.
+3. Connect your iPhone. In **Signing & Capabilities**, choose your Personal Team and set a unique bundle ID.
+4. Select your iPhone in Xcode and press **Run**.
+5. Enter your Mac's Tailscale name, macOS username, and login password.
+
+## Problems?
+
+- Signing error: choose your Personal Team and change the bundle ID.
+- Cannot connect: check Tailscale and Screen Sharing.
+- Login fails: run `whoami` on your Mac and use that username.
 
 ## Controls
 

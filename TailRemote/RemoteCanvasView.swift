@@ -1,11 +1,19 @@
+import Combine
 import CoreGraphics
 import RoyalVNCKit
 import SwiftUI
 import UIKit
 
+struct RemoteClickFeedback {
+    let point: CGPoint
+    let button: VNCMouseButton
+    let count: Int
+}
+
 @MainActor
 protocol RemoteCanvasInput: AnyObject {
     var cursorPoint: CGPoint { get }
+    var clickFeedback: PassthroughSubject<RemoteClickFeedback, Never> { get }
     func movePointer(viewDelta: CGPoint, viewSize: CGSize, zoomScale: CGFloat)
     func mouseDown(_ button: VNCMouseButton)
     func mouseUp(_ button: VNCMouseButton)
@@ -34,10 +42,21 @@ struct RemoteCanvasView: UIViewRepresentable {
 
 @MainActor
 final class RemoteCanvasUIView: UIView, UIGestureRecognizerDelegate {
-    var session: (any RemoteCanvasInput)?
+    var session: (any RemoteCanvasInput)? {
+        didSet {
+            guard oldValue !== session else { return }
+            clickFeedbackLayer.removeAllAnimations()
+            clickFeedbackSubscription = session?.clickFeedback.sink { [weak self] click in
+                self?.showClickFeedback(click)
+            }
+        }
+    }
 
     private let imageLayer = CALayer()
     private let cursorLayer = CAShapeLayer()
+    private let clickFeedbackLayer = CAShapeLayer()
+    private var clickFeedbackSubscription: AnyCancellable?
+    private var clickFeedbackPoint: CGPoint?
     private var framebufferSize: CGSize = .zero
     private var cursorPoint: CGPoint = .zero
     private var previousDragLocation: CGPoint?
@@ -60,6 +79,16 @@ final class RemoteCanvasUIView: UIView, UIGestureRecognizerDelegate {
         imageLayer.magnificationFilter = .linear
         imageLayer.minificationFilter = .trilinear
         layer.addSublayer(imageLayer)
+
+        clickFeedbackLayer.bounds = CGRect(x: 0, y: 0, width: 36, height: 36)
+        clickFeedbackLayer.path = UIBezierPath(ovalIn: clickFeedbackLayer.bounds.insetBy(dx: 2, dy: 2)).cgPath
+        clickFeedbackLayer.lineWidth = 2.5
+        clickFeedbackLayer.opacity = 0
+        clickFeedbackLayer.shadowColor = UIColor.black.cgColor
+        clickFeedbackLayer.shadowOpacity = 0.6
+        clickFeedbackLayer.shadowRadius = 2
+        clickFeedbackLayer.shadowOffset = .zero
+        layer.addSublayer(clickFeedbackLayer)
 
         cursorLayer.bounds = CGRect(x: 0, y: 0, width: 14, height: 14)
         cursorLayer.path = UIBezierPath(ovalIn: cursorLayer.bounds).cgPath
@@ -119,6 +148,7 @@ final class RemoteCanvasUIView: UIView, UIGestureRecognizerDelegate {
 
         guard framebufferSize.width > 0, framebufferSize.height > 0 else {
             cursorLayer.isHidden = true
+            clickFeedbackLayer.removeAllAnimations()
             return
         }
 
@@ -126,6 +156,49 @@ final class RemoteCanvasUIView: UIView, UIGestureRecognizerDelegate {
         let x = imageRect.minX + (cursorPoint.x / framebufferSize.width) * imageRect.width
         let y = imageRect.minY + (cursorPoint.y / framebufferSize.height) * imageRect.height
         cursorLayer.position = CGPoint(x: x, y: y)
+        if let clickFeedbackPoint {
+            // Anchor to the clicked desktop location, not the finger or a cursor
+            // that may already have moved. Keep the ring the same size at any zoom.
+            clickFeedbackLayer.position = CGPoint(
+                x: imageRect.minX + (clickFeedbackPoint.x / framebufferSize.width) * imageRect.width,
+                y: imageRect.minY + (clickFeedbackPoint.y / framebufferSize.height) * imageRect.height
+            )
+        }
+    }
+
+    private func showClickFeedback(_ click: RemoteClickFeedback) {
+        guard framebufferSize.width > 0, framebufferSize.height > 0 else { return }
+        clickFeedbackPoint = click.point
+        layoutRemoteContent()
+
+        let color = UIColor(click.button == .right ? AppTheme.connected : AppTheme.tailBlue)
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        clickFeedbackLayer.strokeColor = color.cgColor
+        clickFeedbackLayer.fillColor = color.withAlphaComponent(0.12).cgColor
+        CATransaction.commit()
+
+        let fade = CAKeyframeAnimation(keyPath: "opacity")
+        fade.values = [1, 0.85, 0]
+        fade.keyTimes = [0, 0.35, 1]
+        let pulse = CAAnimationGroup()
+        pulse.animations = [fade]
+        pulse.duration = 0.42
+        pulse.repeatCount = click.count > 1 ? 2 : 1
+        pulse.timingFunction = CAMediaTimingFunction(name: .easeOut)
+
+        if UIAccessibility.isReduceMotionEnabled {
+            pulse.duration = 0.25
+            pulse.repeatCount = 1
+        } else {
+            let expand = CABasicAnimation(keyPath: "transform.scale")
+            expand.fromValue = 0.55
+            expand.toValue = 1.65
+            pulse.animations?.append(expand)
+        }
+        pulse.animations?.forEach { $0.duration = pulse.duration }
+        // Replacing one local animation cannot delay input or accumulate layers.
+        clickFeedbackLayer.add(pulse, forKey: "click")
     }
 
     private func installGestures() {

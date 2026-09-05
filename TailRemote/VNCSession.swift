@@ -1,3 +1,4 @@
+import Combine
 import CoreGraphics
 import Foundation
 import OSLog
@@ -34,6 +35,7 @@ final class VNCSession: NSObject, ObservableObject, VNCConnectionDelegate, Remot
     @Published private(set) var cursorPoint: CGPoint = .zero
     @Published private(set) var lastError: String?
     @Published private(set) var credentialStorageError: String?
+    let clickFeedback = PassthroughSubject<RemoteClickFeedback, Never>()
 
     private var connection: VNCConnection?
     private var framebuffer: VNCFramebuffer?
@@ -148,6 +150,9 @@ final class VNCSession: NSObject, ObservableObject, VNCConnectionDelegate, Remot
         for _ in 0..<max(count, 1) {
             mouseDown(button)
             mouseUp(button)
+        }
+        if state == .connected, connection != nil {
+            clickFeedback.send(RemoteClickFeedback(point: cursorPoint, button: button, count: count))
         }
     }
 

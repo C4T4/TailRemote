@@ -21,6 +21,7 @@ TailRemote is a small, open-source iPhone client for controlling a Mac through m
 - Apple Screen Sharing authentication through RoyalVNCKit
 - Live remote framebuffer with a local pointer
 - Relative touchpad-style pointer control, clicks, dragging, and scrolling
+- Visible click pulses at the remote pointer, including double clicks and right clicks
 - Pinch zoom from 1× to 4× with manual panning and cursor edge-following
 - iOS keyboard input plus Escape, Tab, and right-click shortcuts
 - Saved Mac picker with a remembered username per Mac and passwords in the iPhone Keychain

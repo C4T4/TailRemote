@@ -1,4 +1,5 @@
 #if DEBUG
+import Combine
 import RoyalVNCKit
 import SwiftUI
 
@@ -26,6 +27,7 @@ struct RemoteGestureTestView: UIViewRepresentable {
         static let framebufferSize = CGSize(width: 1920, height: 1080)
         weak var canvas: RemoteCanvasUIView?
         var cursorPoint = CGPoint(x: 960, y: 540)
+        let clickFeedback = PassthroughSubject<RemoteClickFeedback, Never>()
         private var moves = 0
         private var clicks = 0
         private var rightClicks = 0
@@ -54,6 +56,7 @@ struct RemoteGestureTestView: UIViewRepresentable {
         func mouseUp(_ button: VNCMouseButton) { ups += 1; publish() }
         func click(_ button: VNCMouseButton, count: Int) {
             if button == .right { rightClicks += count } else { clicks += count }
+            clickFeedback.send(RemoteClickFeedback(point: cursorPoint, button: button, count: count))
             publish()
         }
         func scroll(_ wheel: VNCMouseWheel, steps: UInt32) { scrolls += Int(steps); publish() }

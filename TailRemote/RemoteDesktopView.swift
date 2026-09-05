@@ -23,6 +23,14 @@ struct RemoteDesktopView: View {
             VStack {
                 statusPill
                     .padding(.top, 8)
+                if let error = session.credentialStorageError {
+                    Text(error)
+                        .font(.footnote)
+                        .foregroundStyle(.white)
+                        .padding(10)
+                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
+                        .padding(.horizontal, 16)
+                }
                 Spacer()
                 toolbar
                     .padding(.horizontal, 12)
@@ -116,4 +124,3 @@ struct RemoteDesktopView: View {
         .buttonStyle(.plain)
     }
 }
-

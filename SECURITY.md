@@ -25,4 +25,17 @@ TailRemote does not make an exposed VNC server safe. Do not forward TCP port `59
 
 ## Credential handling
 
-The host and username are stored in iOS `UserDefaults`. The password is held in process memory for the active connection and cleared on disconnect. It is not stored in `UserDefaults`, Keychain, logs, analytics, or the repository.
+The host, username, and Remember password preference are stored in iOS `UserDefaults`.
+When Remember password is enabled, the password is saved only after successful
+authentication, using a generic password item in the app's Keychain. Each item is
+scoped to the normalized hostname, port, and username. Changing the selected Mac
+or account clears the form password before loading a matching saved item.
+
+Items use `kSecAttrAccessibleWhenUnlockedThisDeviceOnly` and disable synchronization.
+They are accessible only while the iPhone is unlocked, do not sync to iCloud, and
+do not migrate to another device. Turning Remember password off removes the item
+for the selected Mac/account. Failed sign-ins do not overwrite a saved password.
+
+Passwords are never stored in `UserDefaults`, logs, analytics, or the repository.
+The active session's in-memory password is cleared on disconnect. Keychain errors
+are shown without including the password, account, or host in diagnostics.

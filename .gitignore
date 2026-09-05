@@ -6,6 +6,7 @@ build/
 *.ipa
 *.xcuserstate
 xcuserdata/
+__pycache__/
 
 # Local signing material
 *.mobileprovision

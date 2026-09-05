@@ -42,6 +42,58 @@ final class RemoteGeometryTests: XCTestCase {
         XCTAssertEqual(RemoteGeometry.clampedZoomScale(8), 4)
     }
 
+    func testPointerTravelOnScreenIsConsistentAtEveryZoomLevel() {
+        let framebuffer = CGSize(width: 1920, height: 1080)
+        let viewports = [CGSize(width: 390, height: 844), CGSize(width: 844, height: 390)]
+        let fingerDelta = CGPoint(x: 10, y: -5)
+
+        for viewport in viewports {
+            let baseRect = RemoteGeometry.aspectFitRect(
+                imageSize: framebuffer,
+                in: CGRect(origin: .zero, size: viewport)
+            )
+            for zoom: CGFloat in [1, 2, 4] {
+                let delta = RemoteGeometry.framebufferDelta(
+                    fromViewDelta: fingerDelta,
+                    framebufferSize: framebuffer,
+                    viewSize: baseRect.size,
+                    zoomScale: zoom
+                )
+                XCTAssertEqual(delta.x * baseRect.width * zoom / framebuffer.width, 16, accuracy: 0.001)
+                XCTAssertEqual(delta.y * baseRect.height * zoom / framebuffer.height, -8, accuracy: 0.001)
+            }
+        }
+    }
+
+    func testPointerDeltaClampsZoomAndHandlesEmptyGeometry() {
+        let framebuffer = CGSize(width: 1920, height: 1080)
+        let view = CGSize(width: 390, height: 219.375)
+        let delta = CGPoint(x: 10, y: 5)
+
+        for (requestedZoom, effectiveZoom): (CGFloat, CGFloat) in [(0, 1), (10, 4)] {
+            XCTAssertEqual(
+                RemoteGeometry.framebufferDelta(
+                    fromViewDelta: delta, framebufferSize: framebuffer, viewSize: view, zoomScale: requestedZoom
+                ),
+                RemoteGeometry.framebufferDelta(
+                    fromViewDelta: delta, framebufferSize: framebuffer, viewSize: view, zoomScale: effectiveZoom
+                )
+            )
+        }
+        XCTAssertEqual(
+            RemoteGeometry.framebufferDelta(
+                fromViewDelta: delta, framebufferSize: .zero, viewSize: view, zoomScale: 4
+            ),
+            .zero
+        )
+        XCTAssertEqual(
+            RemoteGeometry.framebufferDelta(
+                fromViewDelta: delta, framebufferSize: framebuffer, viewSize: .zero, zoomScale: 4
+            ),
+            .zero
+        )
+    }
+
     func testPanOffsetStaysInsideZoomedDesktop() {
         let offset = RemoteGeometry.clampedPanOffset(
             CGPoint(x: 500, y: -500),

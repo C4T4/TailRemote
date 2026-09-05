@@ -1,6 +1,6 @@
 # Contributing to TailRemote
 
-TailRemote is intentionally a small, direct iPhone-to-Mac remote-control client. Contributions should preserve its core constraints: no hosted backend, no relay, no analytics, and no credential persistence.
+TailRemote is intentionally a small, direct iPhone-to-Mac remote-control client. Contributions should preserve its core constraints: no hosted backend, no relay, no analytics, and passwords stored only in the device-local Keychain when Remember password is enabled.
 
 ## Before opening a pull request
 
@@ -16,6 +16,10 @@ TailRemote is intentionally a small, direct iPhone-to-Mac remote-control client.
 2. Install XcodeGen with `brew install xcodegen`.
 3. Run `xcodegen generate` after changing `project.yml`.
 4. Open `TailRemote.xcodeproj` and build the `TailRemote` scheme.
+
+For command-line device builds, override `TAILREMOTE_BUNDLE_IDENTIFIER` with your
+app's bundle ID. Do not pass a global `PRODUCT_BUNDLE_IDENTIFIER` override: Xcode
+also applies it to package frameworks, which makes iOS reject duplicate bundle IDs.
 
 The generated Xcode project is tracked. Include it in the same change whenever `project.yml` modifies the project structure or build settings.
 

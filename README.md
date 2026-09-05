@@ -23,7 +23,8 @@ TailRemote is a small, open-source iPhone client for controlling a Mac through m
 - Relative touchpad-style pointer control, clicks, dragging, and scrolling
 - Pinch zoom from 1× to 4× with manual panning and cursor edge-following
 - iOS keyboard input plus Escape, Tab, and right-click shortcuts
-- Remembered host and username; the password stays in memory only for the active connection
+- Saved Mac picker with a remembered username per Mac and passwords in the iPhone Keychain
+- Import Mac names and addresses from Tailscale without an API key
 
 ## Quick start
 
@@ -39,13 +40,44 @@ You need a Mac, an iPhone with iOS 17+, Xcode, and [Tailscale](https://tailscale
 
 3. Connect your iPhone. In **Signing & Capabilities**, choose your Personal Team and set a unique bundle ID.
 4. Select your iPhone in Xcode and press **Run**.
-5. Enter your Mac's Tailscale name, macOS username, and login password.
+5. Choose your Mac from the picker, or use **Add a Mac** to enter its Tailscale address and macOS username. Enter your login password once.
+
+**Remember password** is on by default. Sign in once to save it securely on this
+iPhone; the matching Mac and username will have the password filled in next time,
+including after closing the app. Turn the toggle off to remove that saved password.
+
+### Import Macs from Tailscale
+
+On your Mac, with Tailscale connected, run:
+
+```sh
+python3 scripts/export-tailscale-macs.py ~/Downloads/TailscaleMacs.json
+```
+
+Transfer that file to your iPhone and choose **Import Tailscale Macs** in the Mac
+picker. It contains Mac names and private addresses, plus the current Mac's local
+username, with no passwords or tokens. The picker remembers the imported devices;
+export and import again to update it. This is a saved list, not live discovery from
+the separate Tailscale iOS app. TailRemote never guesses another Mac's username.
+
+For a connected development phone, the export can also be copied into the app's
+Documents folder as `TailscaleMacs.json` with `devicectl device copy to` using the
+`appDataContainer` domain and your app's bundle ID. The next launch imports the file
+and removes that temporary copy. Keep exports outside the repository.
+
+The shared TailRemote scheme uses **Release** for Run so Screen Sharing authentication
+and screen decoding use optimized dependencies on your iPhone. Tests use **Debug**.
+If you change Run to Debug for development, switch back to Release before comparing
+connection speed or using the app regularly.
 
 ## Problems?
 
 - Signing error: choose your Personal Team and change the bundle ID.
 - Cannot connect: check Tailscale and Screen Sharing.
 - Login fails: run `whoami` on your Mac and use that username.
+- Startup now distinguishes **Connecting**, **Signing in**, and **Loading desktop**.
+  It reports **Connected** when the first desktop image is available. Local console
+  timings record these stages without hostnames, usernames, or passwords.
 
 ## Controls
 
@@ -53,20 +85,26 @@ You need a Mac, an iPhone with iOS 17+, Xcode, and [Tailscale](https://tailscale
 | --- | --- |
 | One-finger drag | Move the pointer |
 | Tap / double-tap | Click / double-click |
-| Hold, then drag | Drag a window, slider, or item |
+| Hold still for about half a second, then drag | Drag a window, slider, or item |
 | Two-finger tap | Right-click |
 | Two-finger drag at 1× | Scroll the Mac |
 | Pinch | Zoom from 1× to 4× |
 | Two-finger drag while zoomed | Pan around the desktop |
 
 While zoomed, moving the pointer near an edge automatically follows it around the desktop.
+Pointer movement keeps the same on-screen sensitivity at every zoom level.
 
 ## Security model
 
 - Tailscale provides private network reachability; it does not replace Screen Sharing authentication.
 - TailRemote sends credentials only to the selected Screen Sharing server during the authentication handshake.
 - The host and username are stored in iOS `UserDefaults` for convenience.
-- The password is never written to disk or committed to the repository. It is cleared when the session disconnects.
+- With **Remember password** enabled, a successful sign-in saves the password in
+  the iPhone Keychain for that host, port, and username. It is available only while
+  the device is unlocked and does not sync to iCloud or migrate to another device.
+- Passwords are never stored in `UserDefaults`, logs, or the repository. The active
+  session's in-memory password is cleared on disconnect. Turning off **Remember
+  password** removes the saved password for the selected Mac and account.
 - TailRemote does not open ports, operate a relay, collect analytics, or send telemetry.
 
 Only connect to Macs and networks you trust. See [SECURITY.md](SECURITY.md) for reporting vulnerabilities and the supported threat model.
@@ -88,7 +126,7 @@ RoyalVNCKit is pinned to a tested revision in `project.yml` and `Package.resolve
 
 ## Known limitations
 
-- One saved Mac profile
+- Tailscale device imports are snapshots and do not refresh automatically
 - No remote user discovery; Screen Sharing does not expose account names before authentication
 - No audio, file transfer, or App Store distribution
 - Keyboard support focuses on text entry and a small set of special keys

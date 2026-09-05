@@ -27,7 +27,8 @@ enum RemoteGeometry {
         fromViewDelta delta: CGPoint,
         framebufferSize: CGSize,
         viewSize: CGSize,
-        sensitivity: CGFloat = 1.6
+        sensitivity: CGFloat = 1.6,
+        zoomScale: CGFloat = minimumZoomScale
     ) -> CGPoint {
         guard framebufferSize.width > 0,
               framebufferSize.height > 0,
@@ -37,6 +38,7 @@ enum RemoteGeometry {
         }
 
         let scale = max(framebufferSize.width / viewSize.width, framebufferSize.height / viewSize.height)
+            / clampedZoomScale(zoomScale)
         return CGPoint(x: delta.x * scale * sensitivity, y: delta.y * scale * sensitivity)
     }
 

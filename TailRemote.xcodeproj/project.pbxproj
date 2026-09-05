@@ -7,22 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09AE5CCFC1FD6FA3490791B9 /* RemoteGestureTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594A845972A03C037672B55C /* RemoteGestureTestView.swift */; };
+		0A44B0252D348759E06C7169 /* SavedMacsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9138844A9954EAFC9C39B0E /* SavedMacsTests.swift */; };
+		0B79BD71585CE484B2F87E2B /* CredentialTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C7138856B6168B6101E7F3 /* CredentialTestView.swift */; };
 		1126A8F4E09410E21B6F6C12 /* RemoteCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8074CBA02B1C98C506FEF0A4 /* RemoteCanvasView.swift */; };
+		1E955FF4005100F00301ABC0 /* KeychainPasswordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2128B26F5C370D37B0F52C8E /* KeychainPasswordStore.swift */; };
+		20694CF014CFDD2A2C30B058 /* KeychainPasswordStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79BD55E6BF62E1871EF378FE /* KeychainPasswordStoreTests.swift */; };
+		2A3B863C6E00C9639D10F2C1 /* VNCSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD981D2AE81248778C18E1E3 /* VNCSessionTests.swift */; };
 		353328B7D2C136F54938841A /* RemoteGeometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E143ECD47EB1A41E814E6835 /* RemoteGeometry.swift */; };
 		49B53A9597570CD608E6FFA3 /* TailRemoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D089BE7D05C1F6CE1392BE99 /* TailRemoteApp.swift */; };
+		4F4A4E1303B0A9CE045475BE /* ConnectionCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8ECEDB0D71F6E4F37D7353 /* ConnectionCredentials.swift */; };
+		510EE05FDB0E43EBB23FDE8C /* RoyalVNCKit in Frameworks */ = {isa = PBXBuildFile; productRef = F356B10F416470DE472C9B90 /* RoyalVNCKit */; };
 		5B721FAB275BC82491E52CC0 /* RemoteGeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF842EC905513DE1F558427C /* RemoteGeometryTests.swift */; };
 		5E4C489BAA9635075269D4B2 /* VNCSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE94C83448BD353A60F9B7E /* VNCSession.swift */; };
 		6874F12409C884152CC44D2B /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C47AA8088D8DE34F7E4D459 /* AppTheme.swift */; };
+		720D07E7B944DD46503303A3 /* SavedMacs.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2CBB5AB523FFB7DF52D99A6 /* SavedMacs.swift */; };
 		84D2DD3D1B74A16603A37E32 /* RoyalVNCKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 452CC833F045616A452F4A83 /* RoyalVNCKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		851B721799D7F54023BF2166 /* ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200EF57526E9CC3BE3AA2798 /* ConnectView.swift */; };
+		855AC8DC9E5178F4D3ED9826 /* ConnectionCredentialsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE3F6FC144179B44E7C790A /* ConnectionCredentialsTests.swift */; };
+		8F277D1500141C8036A332F3 /* SavedCredentialsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF51CFCA8E4B246A50647FBB /* SavedCredentialsTests.swift */; };
 		AADC534D12452B01245311D1 /* THIRD_PARTY_NOTICES.md in Resources */ = {isa = PBXBuildFile; fileRef = AF36D9C3EDA7E08F9323B2EF /* THIRD_PARTY_NOTICES.md */; };
 		B43E0CDEA8028EB8C6E28E12 /* RemoteKeyboardBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773006B68C596E30C7A15BBD /* RemoteKeyboardBridge.swift */; };
+		B69A4F3B3BBF02E6423573B4 /* RemoteGestureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5EFEB31F3706FF4B124574 /* RemoteGestureTests.swift */; };
 		BE8C6E2552EE4A34FA6CDBAE /* RoyalVNCKit in Frameworks */ = {isa = PBXBuildFile; productRef = 452CC833F045616A452F4A83 /* RoyalVNCKit */; };
 		CD0B0BD248B9866C84970288 /* RemoteDesktopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634414A3D8B57A8BB5AF6C76 /* RemoteDesktopView.swift */; };
 		FD3E904C0EA487A7B9991AD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5D256DB8C695C335278EAF0 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		24E79762AB0778638F705CB2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2247218BEC32B887C1BD79EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FA32CB9C0708196E4FA66470;
+			remoteInfo = TailRemote;
+		};
 		78829F7CAC11309CA9CA2E26 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2247218BEC32B887C1BD79EC /* Project object */;
@@ -47,22 +66,42 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F8ECEDB0D71F6E4F37D7353 /* ConnectionCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCredentials.swift; sourceTree = "<group>"; };
 		200EF57526E9CC3BE3AA2798 /* ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectView.swift; sourceTree = "<group>"; };
+		2128B26F5C370D37B0F52C8E /* KeychainPasswordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPasswordStore.swift; sourceTree = "<group>"; };
+		3E4DBFADD44EA5FD61288E6D /* TailRemoteUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TailRemoteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C47AA8088D8DE34F7E4D459 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		4DE3F6FC144179B44E7C790A /* ConnectionCredentialsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCredentialsTests.swift; sourceTree = "<group>"; };
+		53C7138856B6168B6101E7F3 /* CredentialTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialTestView.swift; sourceTree = "<group>"; };
 		590132C4092C3BD77116DDFD /* TailRemoteTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = TailRemoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		594A845972A03C037672B55C /* RemoteGestureTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGestureTestView.swift; sourceTree = "<group>"; };
 		634414A3D8B57A8BB5AF6C76 /* RemoteDesktopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDesktopView.swift; sourceTree = "<group>"; };
 		773006B68C596E30C7A15BBD /* RemoteKeyboardBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteKeyboardBridge.swift; sourceTree = "<group>"; };
+		79BD55E6BF62E1871EF378FE /* KeychainPasswordStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPasswordStoreTests.swift; sourceTree = "<group>"; };
+		7F5EFEB31F3706FF4B124574 /* RemoteGestureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGestureTests.swift; sourceTree = "<group>"; };
 		8074CBA02B1C98C506FEF0A4 /* RemoteCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteCanvasView.swift; sourceTree = "<group>"; };
 		81E801746FCAE41A56CFF1D8 /* TailRemote.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = TailRemote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CE94C83448BD353A60F9B7E /* VNCSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNCSession.swift; sourceTree = "<group>"; };
 		AF36D9C3EDA7E08F9323B2EF /* THIRD_PARTY_NOTICES.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = THIRD_PARTY_NOTICES.md; sourceTree = "<group>"; };
+		CD981D2AE81248778C18E1E3 /* VNCSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNCSessionTests.swift; sourceTree = "<group>"; };
 		D089BE7D05C1F6CE1392BE99 /* TailRemoteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TailRemoteApp.swift; sourceTree = "<group>"; };
+		D9138844A9954EAFC9C39B0E /* SavedMacsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedMacsTests.swift; sourceTree = "<group>"; };
 		E143ECD47EB1A41E814E6835 /* RemoteGeometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGeometry.swift; sourceTree = "<group>"; };
 		EF842EC905513DE1F558427C /* RemoteGeometryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGeometryTests.swift; sourceTree = "<group>"; };
+		F2CBB5AB523FFB7DF52D99A6 /* SavedMacs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedMacs.swift; sourceTree = "<group>"; };
 		F5D256DB8C695C335278EAF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FF51CFCA8E4B246A50647FBB /* SavedCredentialsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCredentialsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		737F1E63901B293F54709189 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				510EE05FDB0E43EBB23FDE8C /* RoyalVNCKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D531E17A0E405F39C7997E3B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -77,9 +116,22 @@
 		3B4E8A370816B09D2A04490D /* TailRemoteTests */ = {
 			isa = PBXGroup;
 			children = (
+				4DE3F6FC144179B44E7C790A /* ConnectionCredentialsTests.swift */,
+				79BD55E6BF62E1871EF378FE /* KeychainPasswordStoreTests.swift */,
 				EF842EC905513DE1F558427C /* RemoteGeometryTests.swift */,
+				D9138844A9954EAFC9C39B0E /* SavedMacsTests.swift */,
+				CD981D2AE81248778C18E1E3 /* VNCSessionTests.swift */,
 			);
 			path = TailRemoteTests;
+			sourceTree = "<group>";
+		};
+		51CAD2E461FDABB9268BB472 /* TailRemoteUITests */ = {
+			isa = PBXGroup;
+			children = (
+				7F5EFEB31F3706FF4B124574 /* RemoteGestureTests.swift */,
+				FF51CFCA8E4B246A50647FBB /* SavedCredentialsTests.swift */,
+			);
+			path = TailRemoteUITests;
 			sourceTree = "<group>";
 		};
 		8FB0785E7BD0BF8195B40D72 /* TailRemote */ = {
@@ -87,11 +139,16 @@
 			children = (
 				4C47AA8088D8DE34F7E4D459 /* AppTheme.swift */,
 				F5D256DB8C695C335278EAF0 /* Assets.xcassets */,
+				1F8ECEDB0D71F6E4F37D7353 /* ConnectionCredentials.swift */,
 				200EF57526E9CC3BE3AA2798 /* ConnectView.swift */,
+				53C7138856B6168B6101E7F3 /* CredentialTestView.swift */,
+				2128B26F5C370D37B0F52C8E /* KeychainPasswordStore.swift */,
 				8074CBA02B1C98C506FEF0A4 /* RemoteCanvasView.swift */,
 				634414A3D8B57A8BB5AF6C76 /* RemoteDesktopView.swift */,
 				E143ECD47EB1A41E814E6835 /* RemoteGeometry.swift */,
+				594A845972A03C037672B55C /* RemoteGestureTestView.swift */,
 				773006B68C596E30C7A15BBD /* RemoteKeyboardBridge.swift */,
+				F2CBB5AB523FFB7DF52D99A6 /* SavedMacs.swift */,
 				D089BE7D05C1F6CE1392BE99 /* TailRemoteApp.swift */,
 				8CE94C83448BD353A60F9B7E /* VNCSession.swift */,
 			);
@@ -103,6 +160,7 @@
 			children = (
 				81E801746FCAE41A56CFF1D8 /* TailRemote.app */,
 				590132C4092C3BD77116DDFD /* TailRemoteTests.xctest */,
+				3E4DBFADD44EA5FD61288E6D /* TailRemoteUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,6 +171,7 @@
 				AF36D9C3EDA7E08F9323B2EF /* THIRD_PARTY_NOTICES.md */,
 				8FB0785E7BD0BF8195B40D72 /* TailRemote */,
 				3B4E8A370816B09D2A04490D /* TailRemoteTests */,
+				51CAD2E461FDABB9268BB472 /* TailRemoteUITests */,
 				C371250B6323C7D1C72EE36F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -120,11 +179,30 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2CFFC064D139EA4E51410FFE /* TailRemoteUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 747B550932CB1FED26C6E81B /* Build configuration list for PBXNativeTarget "TailRemoteUITests" */;
+			buildPhases = (
+				D452F735CE17043B49296059 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				92B77032050B3E9A6C48B659 /* PBXTargetDependency */,
+			);
+			name = TailRemoteUITests;
+			packageProductDependencies = (
+			);
+			productName = TailRemoteUITests;
+			productReference = 3E4DBFADD44EA5FD61288E6D /* TailRemoteUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		B71C0881033D6F1B34799F37 /* TailRemoteTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 714C47A1A20CFAA8976AFCD0 /* Build configuration list for PBXNativeTarget "TailRemoteTests" */;
 			buildPhases = (
 				7F6F86E4A85C031DD061E93E /* Sources */,
+				737F1E63901B293F54709189 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -133,6 +211,7 @@
 			);
 			name = TailRemoteTests;
 			packageProductDependencies = (
+				F356B10F416470DE472C9B90 /* RoyalVNCKit */,
 			);
 			productName = TailRemoteTests;
 			productReference = 590132C4092C3BD77116DDFD /* TailRemoteTests.xctest */;
@@ -168,6 +247,9 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					2CFFC064D139EA4E51410FFE = {
+						TestTargetID = FA32CB9C0708196E4FA66470;
+					};
 					FA32CB9C0708196E4FA66470 = {
 						ProvisioningStyle = Automatic;
 					};
@@ -192,6 +274,7 @@
 			targets = (
 				FA32CB9C0708196E4FA66470 /* TailRemote */,
 				B71C0881033D6F1B34799F37 /* TailRemoteTests */,
+				2CFFC064D139EA4E51410FFE /* TailRemoteUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -213,7 +296,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				855AC8DC9E5178F4D3ED9826 /* ConnectionCredentialsTests.swift in Sources */,
+				20694CF014CFDD2A2C30B058 /* KeychainPasswordStoreTests.swift in Sources */,
 				5B721FAB275BC82491E52CC0 /* RemoteGeometryTests.swift in Sources */,
+				0A44B0252D348759E06C7169 /* SavedMacsTests.swift in Sources */,
+				2A3B863C6E00C9639D10F2C1 /* VNCSessionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,18 +310,37 @@
 			files = (
 				6874F12409C884152CC44D2B /* AppTheme.swift in Sources */,
 				851B721799D7F54023BF2166 /* ConnectView.swift in Sources */,
+				4F4A4E1303B0A9CE045475BE /* ConnectionCredentials.swift in Sources */,
+				0B79BD71585CE484B2F87E2B /* CredentialTestView.swift in Sources */,
+				1E955FF4005100F00301ABC0 /* KeychainPasswordStore.swift in Sources */,
 				1126A8F4E09410E21B6F6C12 /* RemoteCanvasView.swift in Sources */,
 				CD0B0BD248B9866C84970288 /* RemoteDesktopView.swift in Sources */,
 				353328B7D2C136F54938841A /* RemoteGeometry.swift in Sources */,
+				09AE5CCFC1FD6FA3490791B9 /* RemoteGestureTestView.swift in Sources */,
 				B43E0CDEA8028EB8C6E28E12 /* RemoteKeyboardBridge.swift in Sources */,
+				720D07E7B944DD46503303A3 /* SavedMacs.swift in Sources */,
 				49B53A9597570CD608E6FFA3 /* TailRemoteApp.swift in Sources */,
 				5E4C489BAA9635075269D4B2 /* VNCSession.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D452F735CE17043B49296059 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B69A4F3B3BBF02E6423573B4 /* RemoteGestureTests.swift in Sources */,
+				8F277D1500141C8036A332F3 /* SavedCredentialsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		92B77032050B3E9A6C48B659 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FA32CB9C0708196E4FA66470 /* TailRemote */;
+			targetProxy = 24E79762AB0778638F705CB2 /* PBXContainerItemProxy */;
+		};
 		D0E8AE99C48EE8BFC28CE745 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FA32CB9C0708196E4FA66470 /* TailRemote */;
@@ -262,11 +368,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.TailRemote;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(TAILREMOTE_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = TailRemote;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
+				TAILREMOTE_BUNDLE_IDENTIFIER = com.example.TailRemote;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -290,11 +397,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.TailRemote;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(TAILREMOTE_BUNDLE_IDENTIFIER)";
 				PRODUCT_NAME = TailRemote;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
+				TAILREMOTE_BUNDLE_IDENTIFIER = com.example.TailRemote;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -370,6 +478,42 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		949C68B5F93BBAFEC6F5996B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.TailRemoteUITests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TailRemote;
+			};
+			name = Debug;
+		};
+		9E23BFDC6EDACC71DFF42463 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.TailRemoteUITests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TailRemote;
 			};
 			name = Release;
 		};
@@ -475,6 +619,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
+		747B550932CB1FED26C6E81B /* Build configuration list for PBXNativeTarget "TailRemoteUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				949C68B5F93BBAFEC6F5996B /* Debug */,
+				9E23BFDC6EDACC71DFF42463 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		CBD55C8EEC9E392B71072BE2 /* Build configuration list for PBXProject "TailRemote" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -499,6 +652,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		452CC833F045616A452F4A83 /* RoyalVNCKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 89C0703058790A6DB2A8E500 /* XCRemoteSwiftPackageReference "royalvnc" */;
+			productName = RoyalVNCKit;
+		};
+		F356B10F416470DE472C9B90 /* RoyalVNCKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 89C0703058790A6DB2A8E500 /* XCRemoteSwiftPackageReference "royalvnc" */;
 			productName = RoyalVNCKit;

@@ -3,6 +3,16 @@ import RoyalVNCKit
 import SwiftUI
 import UIKit
 
+@MainActor
+protocol RemoteCanvasInput: AnyObject {
+    var cursorPoint: CGPoint { get }
+    func movePointer(viewDelta: CGPoint, viewSize: CGSize, zoomScale: CGFloat)
+    func mouseDown(_ button: VNCMouseButton)
+    func mouseUp(_ button: VNCMouseButton)
+    func click(_ button: VNCMouseButton, count: Int)
+    func scroll(_ wheel: VNCMouseWheel, steps: UInt32)
+}
+
 struct RemoteCanvasView: UIViewRepresentable {
     @ObservedObject var session: VNCSession
 
@@ -24,7 +34,7 @@ struct RemoteCanvasView: UIViewRepresentable {
 
 @MainActor
 final class RemoteCanvasUIView: UIView, UIGestureRecognizerDelegate {
-    var session: VNCSession?
+    var session: (any RemoteCanvasInput)?
 
     private let imageLayer = CALayer()
     private let cursorLayer = CAShapeLayer()
@@ -75,6 +85,9 @@ final class RemoteCanvasUIView: UIView, UIGestureRecognizerDelegate {
     }
 
     func update(image: CGImage?, framebufferSize: CGSize, cursorPoint: CGPoint) {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        defer { CATransaction.commit() }
         imageLayer.contents = image
         if self.framebufferSize != framebufferSize, self.framebufferSize != .zero {
             zoomScale = RemoteGeometry.minimumZoomScale
@@ -86,6 +99,10 @@ final class RemoteCanvasUIView: UIView, UIGestureRecognizerDelegate {
     }
 
     private func layoutRemoteContent() {
+        // These layers follow live input and frames, not implicit CA animations.
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        defer { CATransaction.commit() }
         let baseImageRect = RemoteGeometry.aspectFitRect(imageSize: framebufferSize, in: bounds)
         panOffset = RemoteGeometry.clampedPanOffset(
             panOffset,
@@ -130,9 +147,16 @@ final class RemoteCanvasUIView: UIView, UIGestureRecognizerDelegate {
         move.maximumNumberOfTouches = 1
 
         let drag = UILongPressGestureRecognizer(target: self, action: #selector(handleDrag))
-        drag.minimumPressDuration = 0.30
-        drag.allowableMovement = 36
-        move.require(toFail: drag)
+        drag.minimumPressDuration = 0.45
+        drag.allowableMovement = 6
+
+        // A swipe must be free to start as soon as UIKit detects movement.
+        // Waiting for the hold used to buffer a large delta and turn slow swipes
+        // into mouse-down events. Only a stationary hold should start a drag.
+        for tap in [singleTap, doubleTap] {
+            tap.require(toFail: move)
+            tap.require(toFail: drag)
+        }
 
         let scroll = UIPanGestureRecognizer(target: self, action: #selector(handleScroll))
         scroll.minimumNumberOfTouches = 2
@@ -146,7 +170,7 @@ final class RemoteCanvasUIView: UIView, UIGestureRecognizerDelegate {
     }
 
     @objc private func handleSingleTap() {
-        session?.click(.left)
+        session?.click(.left, count: 1)
     }
 
     @objc private func handleDoubleTap() {
@@ -154,7 +178,7 @@ final class RemoteCanvasUIView: UIView, UIGestureRecognizerDelegate {
     }
 
     @objc private func handleRightClick() {
-        session?.click(.right)
+        session?.click(.right, count: 1)
     }
 
     @objc private func handleMove(_ gesture: UIPanGestureRecognizer) {
@@ -181,7 +205,9 @@ final class RemoteCanvasUIView: UIView, UIGestureRecognizerDelegate {
             }
             previousDragLocation = location
         case .ended, .cancelled, .failed:
-            session?.mouseUp(.left)
+            if previousDragLocation != nil {
+                session?.mouseUp(.left)
+            }
             previousDragLocation = nil
         default:
             break
@@ -257,7 +283,7 @@ final class RemoteCanvasUIView: UIView, UIGestureRecognizerDelegate {
     private func moveRemotePointer(by delta: CGPoint) {
         guard let session else { return }
         let baseImageRect = RemoteGeometry.aspectFitRect(imageSize: framebufferSize, in: bounds)
-        session.movePointer(viewDelta: delta, viewSize: baseImageRect.size)
+        session.movePointer(viewDelta: delta, viewSize: baseImageRect.size, zoomScale: zoomScale)
         cursorPoint = session.cursorPoint
 
         guard zoomScale > RemoteGeometry.minimumZoomScale,

@@ -1,11 +1,14 @@
 import CoreGraphics
 import Foundation
+import OSLog
 import QuartzCore
 import RoyalVNCKit
 
 enum RemoteConnectionState: Equatable {
     case idle
     case connecting
+    case authenticating
+    case loadingDesktop
     case connected
     case disconnecting
     case disconnected
@@ -14,6 +17,8 @@ enum RemoteConnectionState: Equatable {
         switch self {
         case .idle: return "Ready"
         case .connecting: return "Connecting"
+        case .authenticating: return "Signing in"
+        case .loadingDesktop: return "Loading desktop"
         case .connected: return "Connected"
         case .disconnecting: return "Disconnecting"
         case .disconnected: return "Disconnected"
@@ -22,42 +27,66 @@ enum RemoteConnectionState: Equatable {
 }
 
 @MainActor
-final class VNCSession: NSObject, ObservableObject, VNCConnectionDelegate {
+final class VNCSession: NSObject, ObservableObject, VNCConnectionDelegate, RemoteCanvasInput {
     @Published private(set) var state: RemoteConnectionState = .idle
     @Published private(set) var framebufferImage: CGImage?
     @Published private(set) var framebufferSize: CGSize = .zero
     @Published private(set) var cursorPoint: CGPoint = .zero
     @Published private(set) var lastError: String?
+    @Published private(set) var credentialStorageError: String?
 
     private var connection: VNCConnection?
     private var framebuffer: VNCFramebuffer?
     private var username = ""
     private var password = ""
+    private let passwordStore: any RemotePasswordStoring
+    private var passwordKeyToSave: RemoteCredentialKey?
     private var cursorIsInitialized = false
     private var hasPendingFrame = false
     private var displayLink: CADisplayLink?
+    private let startConnection: (VNCConnection) -> Void
+    private var connectionStartedAt: CFTimeInterval?
+    private let connectionLogger = Logger(subsystem: "TailRemote", category: "Connection")
+
+    init(
+        passwordStore: any RemotePasswordStoring = KeychainPasswordStore(),
+        startConnection: @escaping (VNCConnection) -> Void = { $0.connect() }
+    ) {
+        self.passwordStore = passwordStore
+        self.startConnection = startConnection
+        super.init()
+    }
 
     var showsRemoteScreen: Bool {
         switch state {
-        case .connecting, .connected, .disconnecting:
+        case .connecting, .authenticating, .loadingDesktop, .connected, .disconnecting:
             return true
         case .idle, .disconnected:
             return false
         }
     }
 
-    func connect(hostname: String, port: UInt16, username: String, password: String) {
+    func connect(hostname: String, port: UInt16, username: String, password: String, rememberPassword: Bool = false) {
+        // An old connection may still have delegate tasks queued on MainActor.
+        // Detach it before disconnecting, and check identity in every callback.
+        connection?.delegate = nil
         connection?.disconnect()
         stopDisplayLink()
+        connectionStartedAt = CACurrentMediaTime()
 
         self.username = username
         self.password = password
+        passwordKeyToSave = rememberPassword
+            ? RemoteCredentialKey(hostname: hostname, port: port, username: username)
+            : nil
+        credentialStorageError = nil
         lastError = nil
         framebuffer = nil
         framebufferImage = nil
         framebufferSize = .zero
         cursorPoint = .zero
         cursorIsInitialized = false
+        hasPendingFrame = false
 
         let settings = VNCConnection.Settings(
             isDebugLoggingEnabled: false,
@@ -75,26 +104,28 @@ final class VNCSession: NSObject, ObservableObject, VNCConnectionDelegate {
         let connection = VNCConnection(settings: settings)
         connection.delegate = self
         self.connection = connection
-        state = .connecting
-        startDisplayLink()
-        connection.connect()
+        updateState(.connecting)
+        startConnection(connection)
     }
 
     func disconnect() {
         guard let connection else {
-            state = .disconnected
+            updateState(.disconnected)
             return
         }
-        state = .disconnecting
+        updateState(.disconnecting)
+        stopDisplayLink()
+        hasPendingFrame = false
         connection.disconnect()
     }
 
-    func movePointer(viewDelta: CGPoint, viewSize: CGSize) {
+    func movePointer(viewDelta: CGPoint, viewSize: CGSize, zoomScale: CGFloat = RemoteGeometry.minimumZoomScale) {
         initializeCursorIfNeeded()
         let framebufferDelta = RemoteGeometry.framebufferDelta(
             fromViewDelta: viewDelta,
             framebufferSize: framebufferSize,
-            viewSize: viewSize
+            viewSize: viewSize,
+            zoomScale: zoomScale
         )
         cursorPoint = RemoteGeometry.clamp(
             CGPoint(x: cursorPoint.x + framebufferDelta.x, y: cursorPoint.y + framebufferDelta.y),
@@ -153,6 +184,7 @@ final class VNCSession: NSObject, ObservableObject, VNCConnectionDelegate {
     }
 
     private func startDisplayLink() {
+        guard displayLink == nil else { return }
         let link = CADisplayLink(target: self, selector: #selector(displayLinkFired))
         link.preferredFrameRateRange = CAFrameRateRange(minimum: 15, maximum: 60, preferred: 30)
         link.add(to: .main, forMode: .common)
@@ -165,9 +197,48 @@ final class VNCSession: NSObject, ObservableObject, VNCConnectionDelegate {
     }
 
     @objc private func displayLinkFired() {
-        guard hasPendingFrame, let framebuffer else { return }
+        guard hasPendingFrame, let framebuffer, let image = framebuffer.cgImage else { return }
         hasPendingFrame = false
-        framebufferImage = framebuffer.cgImage
+        framebufferImage = image
+        updateState(.connected)
+    }
+
+    private func updateState(_ newState: RemoteConnectionState) {
+        guard state != newState else { return }
+        state = newState
+        if let connectionStartedAt {
+            let elapsed = CACurrentMediaTime() - connectionStartedAt
+            // Only fixed stage names and elapsed time, never hosts or credentials.
+            connectionLogger.info("\(newState.statusText, privacy: .public) after \(elapsed, privacy: .public) seconds")
+        }
+    }
+
+    private func acceptsCallbacks(from connection: VNCConnection) -> Bool {
+        self.connection === connection && state != .disconnecting && state != .disconnected
+    }
+
+    private func saveAuthenticatedPassword() {
+        guard let key = passwordKeyToSave else { return }
+        passwordKeyToSave = nil
+        do {
+            try passwordStore.save(password, for: key)
+        } catch {
+            credentialStorageError = "Connected, but the password couldn’t be saved on this iPhone."
+        }
+    }
+
+    private func adoptFramebuffer(_ framebuffer: VNCFramebuffer) {
+        guard self.framebuffer !== framebuffer else { return }
+        self.framebuffer = framebuffer
+        framebufferSize = framebuffer.cgSize
+        framebufferImage = nil
+        hasPendingFrame = false
+        if cursorIsInitialized {
+            cursorPoint = RemoteGeometry.clamp(cursorPoint, to: framebufferSize)
+        } else {
+            initializeCursorIfNeeded()
+        }
+        updateState(.loadingDesktop)
     }
 
     nonisolated func connection(
@@ -175,27 +246,34 @@ final class VNCSession: NSObject, ObservableObject, VNCConnectionDelegate {
         stateDidChange connectionState: VNCConnection.ConnectionState
     ) {
         Task { @MainActor [weak self] in
-            guard let self else { return }
+            guard let self, self.connection === connection else { return }
             switch connectionState.status {
             case .connecting:
-                self.state = .connecting
+                break
             case .connected:
-                self.state = .connected
+                guard self.acceptsCallbacks(from: connection) else { return }
+                self.saveAuthenticatedPassword()
+                self.updateState(self.framebufferImage == nil ? .loadingDesktop : .connected)
             case .disconnecting:
-                self.state = .disconnecting
+                self.updateState(.disconnecting)
+                self.stopDisplayLink()
+                self.hasPendingFrame = false
             case .disconnected:
                 if let error = connectionState.error as? VNCError, error.shouldDisplayToUser {
                     self.lastError = error.localizedDescription
                 } else if let error = connectionState.error {
                     self.lastError = error.localizedDescription
                 }
-                self.state = .disconnected
+                self.updateState(.disconnected)
                 self.stopDisplayLink()
                 self.connection?.delegate = nil
                 self.connection = nil
                 self.framebuffer = nil
                 self.framebufferImage = nil
+                self.hasPendingFrame = false
                 self.password = ""
+                self.passwordKeyToSave = nil
+                self.connectionStartedAt = nil
             }
         }
     }
@@ -206,7 +284,7 @@ final class VNCSession: NSObject, ObservableObject, VNCConnectionDelegate {
         completion: @escaping (VNCCredential?) -> Void
     ) {
         Task { @MainActor [weak self] in
-            guard let self else {
+            guard let self, self.acceptsCallbacks(from: connection) else {
                 completion(nil)
                 return
             }
@@ -214,6 +292,10 @@ final class VNCSession: NSObject, ObservableObject, VNCConnectionDelegate {
             guard !self.password.isEmpty else {
                 completion(nil)
                 return
+            }
+
+            if self.state == .connecting {
+                self.updateState(.authenticating)
             }
 
             if authenticationType.requiresUsername, !self.username.isEmpty {
@@ -230,14 +312,10 @@ final class VNCSession: NSObject, ObservableObject, VNCConnectionDelegate {
         _ connection: VNCConnection,
         didCreateFramebuffer framebuffer: VNCFramebuffer
     ) {
-        let size = framebuffer.cgSize
-        let image = framebuffer.cgImage
         Task { @MainActor [weak self] in
-            guard let self else { return }
-            self.framebuffer = framebuffer
-            self.framebufferSize = size
-            self.framebufferImage = image
-            self.initializeCursorIfNeeded()
+            guard let self, self.acceptsCallbacks(from: connection),
+                  connection.framebuffer === framebuffer else { return }
+            self.adoptFramebuffer(framebuffer)
         }
     }
 
@@ -245,14 +323,10 @@ final class VNCSession: NSObject, ObservableObject, VNCConnectionDelegate {
         _ connection: VNCConnection,
         didResizeFramebuffer framebuffer: VNCFramebuffer
     ) {
-        let size = framebuffer.cgSize
-        let image = framebuffer.cgImage
         Task { @MainActor [weak self] in
-            guard let self else { return }
-            self.framebuffer = framebuffer
-            self.framebufferSize = size
-            self.framebufferImage = image
-            self.cursorPoint = RemoteGeometry.clamp(self.cursorPoint, to: size)
+            guard let self, self.acceptsCallbacks(from: connection),
+                  connection.framebuffer === framebuffer else { return }
+            self.adoptFramebuffer(framebuffer)
         }
     }
 
@@ -265,7 +339,16 @@ final class VNCSession: NSObject, ObservableObject, VNCConnectionDelegate {
         height: UInt16
     ) {
         Task { @MainActor [weak self] in
-            self?.hasPendingFrame = true
+            guard let self, self.acceptsCallbacks(from: connection),
+                  connection.framebuffer === framebuffer else { return }
+            self.adoptFramebuffer(framebuffer)
+            self.hasPendingFrame = true
+            if self.framebufferImage == nil {
+                // Present the first available image immediately. Later updates
+                // stay coalesced to the display cadence.
+                self.displayLinkFired()
+                self.startDisplayLink()
+            }
         }
     }
 

@@ -23,7 +23,8 @@ targets:
         embed: true
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.example.TailRemote
+        TAILREMOTE_BUNDLE_IDENTIFIER: com.example.TailRemote
+        PRODUCT_BUNDLE_IDENTIFIER: $(TAILREMOTE_BUNDLE_IDENTIFIER)
         PRODUCT_NAME: TailRemote
         CODE_SIGN_STYLE: Automatic
         SWIFT_VERSION: "5.0"
@@ -47,8 +48,35 @@ targets:
       - TailRemoteTests
     dependencies:
       - target: TailRemote
+      - package: RoyalVNCKit
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.example.TailRemoteTests
         GENERATE_INFOPLIST_FILE: YES
         SWIFT_VERSION: "5.0"
+
+  TailRemoteUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - TailRemoteUITests
+    dependencies:
+      - target: TailRemote
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.TailRemoteUITests
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: "5.0"
+
+schemes:
+  TailRemote:
+    build:
+      targets:
+        TailRemote: all
+    run:
+      config: Release
+    test:
+      config: Debug
+      targets:
+        - TailRemoteTests
+        - TailRemoteUITests

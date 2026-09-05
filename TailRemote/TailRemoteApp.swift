@@ -18,13 +18,28 @@ private struct RootView: View {
 
     var body: some View {
         Group {
+            #if DEBUG
+            if ProcessInfo.processInfo.arguments.contains("--test-remote-gestures") {
+                RemoteGestureTestView()
+            } else if ProcessInfo.processInfo.arguments.contains("--test-credentials") {
+                CredentialTestView()
+            } else {
+                connectionView
+            }
+            #else
+            connectionView
+            #endif
+        }
+        .animation(.easeInOut(duration: 0.22), value: session.showsRemoteScreen)
+    }
+
+    private var connectionView: some View {
+        Group {
             if session.showsRemoteScreen {
                 RemoteDesktopView()
             } else {
                 ConnectView()
             }
         }
-        .animation(.easeInOut(duration: 0.22), value: session.showsRemoteScreen)
     }
 }
-

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TailRemote Privacy Policy</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.55;
+      max-width: 42rem;
+      margin: 2rem auto;
+      padding: 0 1.25rem 3rem;
+      color: #111;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { color: #eee; background: #111; }
+      a { color: #8ab4ff; }
+      table { border-color: #444; }
+      th, td { border-color: #444; }
+    }
+    h1, h2 { line-height: 1.25; }
+    table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+    th, td { border: 1px solid #ccc; padding: 0.5rem 0.65rem; text-align: left; vertical-align: top; }
+    ul { padding-left: 1.2rem; }
+    code { font-size: 0.95em; }
+  </style>
+</head>
+<body>
+  <h1>Privacy Policy for TailRemote</h1>
+  <p><strong>Effective date:</strong> 6 September 2026<br>
+  <strong>Developer:</strong> Waack LLC<br>
+  <strong>App:</strong> TailRemote (<code>com.waack.TailRemote</code>)</p>
+
+  <h2>Summary</h2>
+  <p>TailRemote is a private iPhone remote for your Mac. It connects over your Tailscale network to macOS Screen Sharing. There is no TailRemote account, no TailRemote cloud backend, and no analytics or advertising SDK in the app.</p>
+
+  <h2>Data TailRemote handles on your device</h2>
+  <table>
+    <thead>
+      <tr><th>Data</th><th>Where it lives</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Mac display name, Tailscale address/hostname, port, username</td>
+        <td>On-device (<code>UserDefaults</code>)</td>
+        <td>Remember Macs you added or imported</td>
+      </tr>
+      <tr>
+        <td>Screen Sharing password (optional)</td>
+        <td>On-device Keychain when <strong>Remember password</strong> is on</td>
+        <td>Sign in again without retyping</td>
+      </tr>
+      <tr>
+        <td>Live screen pixels and input events</td>
+        <td>In memory during an active session only</td>
+        <td>Show and control the remote Mac</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Passwords are never written to <code>UserDefaults</code>, logs, or the repository. Keychain items stay on that iPhone, do not sync to iCloud, and are not available while the device is locked. Turning <strong>Remember password</strong> off deletes the saved password for that Mac and username. Disconnect clears the in-memory session password.</p>
+
+  <h2>What TailRemote does not collect</h2>
+  <p>TailRemote does not:</p>
+  <ul>
+    <li>create user accounts or require an email login for the app itself</li>
+    <li>operate a relay, hosted desktop service, or TailRemote server that receives your screen</li>
+    <li>include analytics, crash reporters, advertising, or tracking SDKs</li>
+    <li>sell personal data or share it with data brokers</li>
+  </ul>
+
+  <h2>Network destinations</h2>
+  <p>When you connect, TailRemote talks only to the Mac you select (Screen Sharing over your private Tailscale network). Credentials are sent to that Mac during the Screen Sharing authentication handshake.</p>
+  <p>Importing Macs from Tailscale uses a JSON file you export locally on your Mac. That file is not uploaded to Waack LLC.</p>
+  <p>Tailscale itself is a separate product from Tailscale Inc. Its privacy practices are governed by Tailscale, not by this policy.</p>
+
+  <h2>Third-party components</h2>
+  <p>TailRemote embeds RoyalVNCKit for Screen Sharing / VNC client functionality. See the app’s third-party notices for licenses. Those components run on your device as part of the connection you start.</p>
+
+  <h2>Children</h2>
+  <p>TailRemote is not directed at children under 13.</p>
+
+  <h2>Your choices</h2>
+  <ul>
+    <li>Do not enable <strong>Remember password</strong> if you do not want credentials stored on the iPhone.</li>
+    <li>Delete saved Macs and passwords from within the app, or delete the app to remove on-device data.</li>
+    <li>Only connect to Macs and networks you trust.</li>
+  </ul>
+
+  <h2>Changes</h2>
+  <p>We may update this policy when the app’s data practices change. The effective date at the top will be revised when that happens.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about this policy or TailRemote privacy: <a href="mailto:hello@catalinwaack.com">hello@catalinwaack.com</a> (Waack LLC).</p>
+</body>
+</html>

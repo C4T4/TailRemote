@@ -1,8 +1,8 @@
-# TestFlight and App Store prep (Waack LLC)
+# TestFlight and App Store prep (Waack International LLC)
 
 Bundle ID: `com.waack.TailRemote`  
 Version: `1.0.0` (build `1`)  
-Team: Waack LLC (paid Apple Developer)
+Team: Waack International LLC (paid Apple Developer)
 
 ## Already done in this repo
 
@@ -17,7 +17,7 @@ Team: Waack LLC (paid Apple Developer)
 
 ### 1. Apple Developer (developer.apple.com)
 
-1. Sign in as Waack LLC.
+1. Sign in as Waack International LLC.
 2. Certificates, Identifiers & Profiles → Identifiers → register App ID `com.waack.TailRemote`.
 3. Enable only capabilities you actually use (none required beyond the defaults for this app today).
 
@@ -28,14 +28,14 @@ Team: Waack LLC (paid Apple Developer)
 3. Host [`PRIVACY.md`](PRIVACY.md) as a public HTTPS page and paste that URL into App Privacy / Privacy Policy URL.
 4. App Privacy answers (honest baseline for current code):
    - No data collected by the developer from the app for tracking or analytics
-   - Data that may stay on device only: credentials (Keychain), product interaction / identifiers you choose to disclose if ASC forces a category for on-device Mac list storage — TailRemote does not upload that list to Waack LLC
+   - Data that may stay on device only: credentials (Keychain), product interaction / identifiers you choose to disclose if ASC forces a category for on-device Mac list storage  -  TailRemote does not upload that list to Waack International LLC
 5. Prepare screenshots (6.7" and 6.1" iPhone at minimum for submission).
 6. Review notes for Apple: explain Tailscale + Screen Sharing, that there is no demo account, and that reviewers need Tailscale on a Mac with Screen Sharing enabled (or offer a short loom / setup steps).
 
 ### 3. Xcode on this Mac
 
 1. Open `TailRemote.xcodeproj`.
-2. Signing & Capabilities → Team → **Waack LLC** (not Personal Team).
+2. Signing & Capabilities → Team → **Waack International LLC** (not Personal Team).
 3. Confirm Bundle Identifier is `com.waack.TailRemote`.
 4. Product → Archive (generic iOS device / Any iOS Device).
 5. Distribute App → App Store Connect → Upload.

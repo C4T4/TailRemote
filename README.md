@@ -112,7 +112,7 @@ Only connect to Macs and networks you trust. See [SECURITY.md](SECURITY.md) for 
 
 ## TestFlight / App Store
 
-Distribution under Waack LLC uses bundle ID `com.waack.TailRemote`. See [TESTFLIGHT.md](TESTFLIGHT.md) and [PRIVACY.md](PRIVACY.md). Hosted policy: https://c4t4.github.io/TailRemote/privacy/
+Distribution under Waack International LLC uses bundle ID `com.waack.TailRemote`. See [TESTFLIGHT.md](TESTFLIGHT.md) and [PRIVACY.md](PRIVACY.md). Hosted policy: https://c4t4.github.io/TailRemote/privacy/
 
 ## Development
 

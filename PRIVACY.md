@@ -1,7 +1,7 @@
 # Privacy Policy for TailRemote
 
 **Effective date:** 6 September 2026  
-**Developer:** Waack LLC  
+**Developer:** Waack International LLC  
 **App:** TailRemote (`com.waack.TailRemote`)
 
 ## Summary
@@ -31,7 +31,7 @@ TailRemote does not:
 
 When you connect, TailRemote talks only to the Mac you select (Screen Sharing over your private Tailscale network). Credentials are sent to that Mac during the Screen Sharing authentication handshake.
 
-Importing Macs from Tailscale uses a JSON file you export locally on your Mac. That file is not uploaded to Waack LLC.
+Importing Macs from Tailscale uses a JSON file you export locally on your Mac. That file is not uploaded to Waack International LLC.
 
 Tailscale itself is a separate product from Tailscale Inc. Its privacy practices are governed by Tailscale, not by this policy.
 
@@ -55,4 +55,4 @@ We may update this policy when the app’s data practices change. The effective 
 
 ## Contact
 
-Questions about this policy or TailRemote privacy: **hello@catalinwaack.com** (Waack LLC).
+Questions about this policy or TailRemote privacy: **hello@catalinwaack.com** (Waack International LLC).

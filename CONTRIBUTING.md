@@ -17,9 +17,7 @@ TailRemote is intentionally a small, direct iPhone-to-Mac remote-control client.
 3. Run `xcodegen generate` after changing `project.yml`.
 4. Open `TailRemote.xcodeproj` and build the `TailRemote` scheme.
 
-For command-line device builds, override `TAILREMOTE_BUNDLE_IDENTIFIER` with your
-app's bundle ID. Do not pass a global `PRODUCT_BUNDLE_IDENTIFIER` override: Xcode
-also applies it to package frameworks, which makes iOS reject duplicate bundle IDs.
+The App Store / TestFlight identifier is `com.waack.TailRemote`. For a personal sideload, override `TAILREMOTE_BUNDLE_IDENTIFIER` with your own unique ID. Do not pass a global `PRODUCT_BUNDLE_IDENTIFIER` override: Xcode also applies it to package frameworks, which makes iOS reject duplicate bundle IDs.
 
 The generated Xcode project is tracked. Include it in the same change whenever `project.yml` modifies the project structure or build settings.
 

@@ -110,6 +110,10 @@ Pointer movement keeps the same on-screen sensitivity at every zoom level.
 
 Only connect to Macs and networks you trust. See [SECURITY.md](SECURITY.md) for reporting vulnerabilities and the supported threat model.
 
+## TestFlight / App Store
+
+Distribution under Waack LLC uses bundle ID `com.waack.TailRemote`. See [TESTFLIGHT.md](TESTFLIGHT.md) and [PRIVACY.md](PRIVACY.md). Hosted policy: https://c4t4.github.io/TailRemote/privacy/
+
 ## Development
 
 The generated Xcode project is committed so contributors can build immediately. [`project.yml`](project.yml) is its source of truth.
@@ -129,7 +133,7 @@ RoyalVNCKit is pinned to a tested revision in `project.yml` and `Package.resolve
 
 - Tailscale device imports are snapshots and do not refresh automatically
 - No remote user discovery; Screen Sharing does not expose account names before authentication
-- No audio, file transfer, or App Store distribution
+- No audio or file transfer
 - Keyboard support focuses on text entry and a small set of special keys
 
 ## Contributing
